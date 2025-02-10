@@ -8,10 +8,13 @@ class AnimatedController extends GetxController {
   var buttonX = 800.0.obs;
   var buttonY = 493.0.obs;
   var yes = true.obs;
+  var no = false.obs;
   RxString text = 'Please say yes'.obs;
   RxString requestImage = 'assets/req_1.gif'.obs;
   
   late ConfettiController confettiController;
+  late ConfettiController controllerCenterRight;
+  late ConfettiController controllerCenterLeft;
 
   final List<String> textOptions = [
     'Are you sure?',
@@ -34,7 +37,9 @@ class AnimatedController extends GetxController {
 
   @override
   void onInit() {
-    confettiController = ConfettiController(duration: const Duration(seconds: 3));
+    confettiController = ConfettiController(duration: const Duration(seconds: 10));
+    controllerCenterRight = ConfettiController(duration: const Duration(seconds: 10));
+    controllerCenterLeft = ConfettiController(duration: const Duration(seconds: 10));
     super.onInit();
   }
 
@@ -55,6 +60,9 @@ class AnimatedController extends GetxController {
 
   void acceptValentine() {
     yes.value = false;
+    no.value = false;
+    controllerCenterLeft.play();
+    controllerCenterRight.play();
     confettiController.play();
   }
 }
